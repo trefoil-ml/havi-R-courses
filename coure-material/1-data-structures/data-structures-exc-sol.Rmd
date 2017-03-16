@@ -1,0 +1,146 @@
+
+### Exercises
+
+
+1. Create a vector named v which contains 10 random integer values between -100 and +100.
+
+```{r}
+####################
+#                  #
+#    Exercise 1    #
+#                  #
+####################
+
+v <- sample(-100:100, 10, replace=TRUE)
+
+```
+
+2. Create a two-dimensional 5?5 array named a comprised of sequence of even integers greater than 25.
+
+  Create a list named s containing sequence of 20 capital letters, starting with 'C'.
+   
+```{r}
+####################
+#                  #
+#    Exercise 2    #
+#                  #
+####################
+a <- array(seq(from = 26, length.out = 25, by = 2), c(5, 5))
+s <- LETTERS[match("C", LETTERS):(match("C", LETTERS)+19)]
+
+```
+
+3. Create a list named l and put all previously created objects in it. Name them a, b and c respectively. 
+How many elements are there in the list? Show the structure of the list. Count all elements recursively.
+
+```{r }
+####################
+#                  #
+#    Exercise 3    #
+#                  #
+####################
+
+l <- list(a = v, b = a, c = s)
+length(l)
+str(l)
+length(unlist(l))
+
+```
+
+4. Without running commands in R, answer the following questions:
+
+* what is the result of l[[3]]?
+* How would you access random-th letter in the list element c?
+* If you convert list l to a vector, what will be the type of it's elements?
+* Can this list be converted to an array? What will be the data type of elements in array?
+* Check the results with R.
+
+```{r }
+####################
+#                  #
+#    Exercise 4    #
+#                  #
+####################
+
+l[[3]]
+##  [1] "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S"
+## [18] "T" "U" "V"
+l[[3]][sample(1:length(l[[3]]), 1)]
+## [1] "O"
+class(unlist(l))
+## [1] "character"
+x <- array(l)
+class(x[1])
+## [1] "list"
+```
+
+5. Remove letters from the list l. Convert the list l to a vector and check its class. Compare it with the result from exercise 4, question #3.
+
+```{r }
+####################
+#                  #
+#    Exercise 5    #
+#                  #
+####################
+
+l$c <- NULL
+class(unlist(l))
+## [1] "numeric"
+
+```
+
+6. Find the difference between elements in l[["a"]] and l[["b"]]. Find the intersection between them. Is there number 33 in their union?
+
+```{r}
+####################
+#                  #
+#    Exercise 6    #
+#                  #
+####################
+
+setdiff(l$a, l$b)
+## [1] -83 -44  71 -54 -17 -40 -76  22
+intersect(l$a, l$b)
+## [1] 72 58
+33 %in% union(l$a, l$b)
+## [1] FALSE
+```
+
+7. Create 5?5 matrix named m and fill it with random numeric values rounded to two decimal places, ranging from 1.00 to 100.00.
+
+```{r }
+####################
+#                  #
+#    Exercise 7    #
+#                  #
+####################
+
+m <- matrix(data = round(runif(5*5, 0.99, 100.00), 2), nrow = 5)
+
+```
+
+8. Answer the following question without running R command, then check the result.
+   What will be the class of data structure if you convert matrix m to:
+   * vector
+   * list
+   * data frame
+   * array?
+   
+```{r }
+####################
+#                  #
+#    Exercise 8    #
+#                  #
+####################
+
+class(as.vector(m))
+## [1] "numeric"
+class(as.list(m))
+## [1] "list"
+class(as.data.frame(m))
+## [1] "data.frame"
+class(as.array(m))
+## [1] "matrix"
+
+```
+   

@@ -1,0 +1,399 @@
+---
+title: "Data structures"
+author: "Hicham Zmarrou"
+date: "March 15, 2017"
+output: html_document
+---
+
+
+  
+  
+## Vectors
+Numeric Vectors
+
+There are several ways to assign values to a variable:
+  
+
+```{r}
+a <- 1.7               # assign a value to a vector with only one element (~ scalar)
+1.7 -> a               # assign a value to a vector with only one element (~ scalar)
+a = 1.7                # assign a value to a vector with only one element (~ scalar)
+assign("a", 1.7)       # assign a value to a vector with only one element (~ scalar)
+```
+To show the values:
+
+```{r}  
+ a                      # show the value in the screen (not valid in scripts)
+print(a)               # show the value in the screen (valid in scripts)
+```
+
+To generate a vector with several numeric values:
+
+```{r}  
+a <- c(10, 11, 15, 19) # assign four values to a vector using the concatenate command c()
+a                      # show the value in the screen
+```
+The operations are always done over all the elements of the numeric array:
+
+```{r}  
+a*a                    # evaluate the square value of every element in the vector
+```
+
+```{r}
+1/a                    # evaluate the inverse value of every element in the vector
+````
+
+```{r}
+b <- a-1               # subtract 1 from every element and assign the result to b
+b
+```
+
+To generate a sequence:
+```{r}  
+2:10                                # generate a sequence from n1=2 to n2=10 using n1:n2
+5:1                                 # generate an inverse sequence if n2 < n1
+```
+
+```{r}
+# seq(from=n1, to=n2, by=n3)          # generate sequence from n1 to n2 using n3 step
+seq(from=1, to=10, by=3)           #  (parameters names can be avoided if order is kept)
+seq(from=1, to=10, by=3)
+seq(1, 10, 3)
+seq(length=10, from=1, by=3)        # generate a fixed length sequence
+help(seq)                           # for help about this command
+```
+
+To generate repetitions:
+
+```{r}  
+a <- 1:3; b <- rep(a, times=3); c <- rep(a, each=3)         # command rep()
+```
+
+In the previous example we have run three commands in the same line. They have been separated by a ‘;’.
+
+The content of the three variables is now:
+```{r}  
+a  # print(a)
+b 
+c
+```
+The recycling rule: vectors of different sizes can be combined, as far as the length of the longer vector is a multiple of the shorter vector’s length (otherwise a warning is issued, although the operation is carried out):
+
+```{r}  
+a+c                                         # proper dimensions
+d <- c(10,100)
+b+d                                         # incorrect dimensions
+```
+
+```{r}
+ls()
+rm(a,c)                                     # remove objects 'a' and 'b'
+ls()                                        # list current objects
+```
+
+In order to remove everything in the working environment:
+```{r}  
+rm(list=ls())                               # Use this with caution
+ls()                                        # (you'll receive no warning!)
+```
+
+
+```{r}
+a <- seq(1:10)                                # generate a sequence
+a                                           # show values in screen    
+```
+```{r}
+b <- (a>5)                                  # assign values from an inequality
+b                                           # show values in screen
+```
+
+```{r}
+a[b]                                        # show values that fulfil the condition
+```
+
+```{r}
+a[a>5]                                      # the same, but avoiding intermediate variable
+```
+
+```{r}
+a <- "This is an example"                   # generate a character vector
+a                                           # show vector content
+``` 
+
+
+```{r}
+x <- 1.5
+y <- -2.7
+paste("Point is (",x,",",y,")", sep="")     # concatenate x, y and a string using 'paste'
+
+```
+
+### Matrices
+A matrix is a bi-dimensional collection of data:
+  
+
+```{r}    
+a <- matrix(1:12, nrow=3, ncol=4)           # define a matrix with 3 rows and 4 columns
+a
+```
+
+
+```{r}
+dim(a)                                      # return matrix dimensions (rows,columns)
+```
+
+```{r}
+a <- matrix(1:8, nrow=4, ncol=4)            # create a matrix with 4 rows and 4 columns
+a
+```
+
+
+
+### Arrays
+They are similar to the matrices although they can have 2 o more dimensions.
+
+```{r}
+z <- array(1:24, dim=c(2,3,4))
+z
+```
+
+### Factors
+Factors are vectors that contain categorical information useful to group the values of other vectors of the same size. Let’s see an example:
+
+```{r}  
+bv <- c(0.92,0.97,0.87,0.91,0.92,1.04,0.91,0.94,0.96,
+            +         0.90,0.96,0.86,0.85)          # (B-V) colours from 13 galaxies
+```
+
+If additional information is available (for instance, the morphological type of the galaxies) we can create a factor containing the galaxy types:
+  
+
+```{r}  
+morfo <- c("Sab","E","Sab","S0","E","E","S0","S0","E","Sab","E","Sab","S0") # morphological info (same size)
+length(morfo)                                       # ensure vector is the same size
+```
+
+```{r}  
+fmorfo <- factor(morfo)                             # create factor with 'factor()'
+fmorfo
+```
+
+
+```{r}  
+levels(fmorfo)                                      # show factor levels
+```
+
+We could use this additional information to perform an statistical analysis segregating the data according to these types. This will be covered lately in the Functions section.
+
+### Lists
+Lists are ordered collections of objects, where the elements can be of a different type (a list can be a combination of matrices, vectors, other lists, etc.) They are created using the list() function:
+  
+```{r}  
+gal <- list(name="NGC3379", morf="E", T.RC3=-5, colours=c(0.53,0.96))
+gal
+```
+
+
+```
+
+gal$<Tab>                   # pressing Tab key after '$', the elements of 'gal' are shown
+#    gal$name     gal$morf     gal$T.RC3    gal$colours
+```
+
+```{r}
+length(gal)                 # check how many elements 'gal' has
+```
+
+```{r}
+names(gal)                  # return element names
+```
+
+```{r}
+gal$radio <- TRUE                           # add a boolean element
+gal$redshift <- 0.002922                    # add a numeric element
+```
+
+```{r} 
+names(gal)                                  # return element names
+```
+
+
+Lists can be concatenated to generate bigger lists. If we have list1, list2, list3, we can create a unique list which is the result of the union of these three lists:
+
+``` 
+list123 <- c(list1, list2, list3)
+```
+As the elements in a list can be R objects of a different type:
+  
+Lists are extremely versatile since they can store every type of information (good)
+Lists can be converted in objects with a rather complex structure (bad). A list can contain several elements which are vectors of different length, which is similar to having a table where the columns have a different number of rows.
+The ideal situation is to take advantage of the list versatility but preventing them from growing with a very complex structure. This is why R has defined a new type of data which fulfils both requirements: a Data Frame.
+
+### Data Frames (Tables)
+
+A Data Frame is an special type of list very useful for the statistical work. There are some restrictions to guarantee that they can be used for this statistical purpose.
+
+Among other restrictions, a Data Frame must verify that:
+* List components must be vectors (numeric, character or logical vectors), factors, numeric matrices or other data frames.
+* Vectors, which are the variables in the data frame, must be of the same length.
+
+### Warning
+
+In a data frame, character vectors are automatically converted into factors, and the number of levels can be determined as the number of different values in such a vector. This default behaviour can be modified with the options(stringsAsFactors = FALSE) command.
+Basically, in a Data Frame all the information is displayed as a table where the columns have the same number of rows and can contain different type objects (numbers, characters, ...).
+
+Data Frames can be created using the data.frame() function. Let’s see how to define a data frame with two elements, a numeric vector and a character vector (note that both must be same length vectors):
+  
+```{r}
+options(stringsAsFactors = FALSE)
+df <- data.frame(numbers=c(10,20,30,40),text=c("a","b","c","a"))
+df
+```
+
+```{r}
+df$text                                     # character vector not converted to a factor
+```
+
+
+```{r}
+options(stringsAsFactors = TRUE)            # default
+df <- data.frame(numbers=c(10,20,30,40),text=c("a","b","c","a"))
+df$text
+```
+
+
+```{r}
+df$numbers                               # numeric vector of length = 4
+```
+
+``` {r }
+mode(df)                                    # storage mode of the object
+
+```
+
+```{r}
+typeof(df)                                  # (internal) storage mode of the object
+```
+
+```{r}
+class(df)                                   # object class
+```
+
+
+However the most common way of defining a data frame is reading the data stored in a file. We will see later how to do it using read.table() function.
+
+#### Factors and Tables
+
+It is frequently useful (for instance, for table creation) to be able to generate factors from a numeric continuum variable. To do so, we can use the cut command. Its parameter breaks defines how the data are divided. If breaks is a number, this is used as the number of (same length) intervals:
+
+```{r} 
+bv <- c(0.92,0.97,0.87,0.91,0.92,1.04,0.91,0.94,0.96,0.90,0.96,0.86,0.85)   # (B-V) colors from 13 galaxies
+fbv <- cut(bv,breaks=3)                     # divide 'bv' in 3 equal-length intervals
+fbv                                         # show in which interval every galaxy is
+```
+
+
+```{r}
+table(fbv)                                  # generate a table with the 3 intervals
+```
+
+
+If breaks is a vector, its values are used as the limits of the intervals:
+  
+```{r}  
+ffbv <- cut(bv,breaks=c(0.80,0.90,1.00,1.10))
+table(ffbv)
+ffbv
+```
+
+If we want just an approximate number of intervals, but with equally spaced round values, we can use the pretty() function (that not always returns the specified number of intervals!):
+
+```{r}  
+fffbv <- cut(bv,pretty(bv,3))               # ask for 3 'pretty' intervals
+table(fffbv)                                # return 4 intervals
+fffbv
+```
+
+We can also use a quantile division:
+  
+```{r}
+ffffbv <- cut(bv,quantile(bv,(0:4)/4))      # ask for the 4 quantiles
+table(ffffbv)
+ffffbv
+```
+
+```{r}
+heights <- c(1.64,1.76,1.79,1.65,1.68,1.65,1.86,1.82,1.73,1.75,1.59,1.87,1.73,1.57,1.63,1.71,1.68,1.73,1.53,1.82)
+weights <- c(64,77,82,62,71,72,85,68,72,75,81,88,72,71,74,69,81,67,65,73)
+ages    <- c(12,34,23,53,23,12,53,38,83,28,28,58,38,63,72,44,33,27,32,38)
+```
+
+For each one of these variables we can generate factors:
+
+```{r}  
+fheights <- cut(heights,c(1.50,1.60,1.70,1.80,1.90))        # factor for 'heights'
+fweights <- cut(weights,c(60,70,80,90))                     # factor for 'weights'
+fages    <- cut(ages,seq(10,90,10))                         # factor for 'ages'
+```
+Table generation is now straightforward using these factors. We can, for instance, generate bi-dimensional tables:
+
+```{r}  
+ta <- table(fheights, fweights)                     # table for 'heights' vs. 'weights'
+ta
+fweights
+```
+
+
+Marginal frequencies can also be included:
+
+```{r}
+addmargins(ta)
+fweights
+```
+
+fheights    (60,70] (70,80] (80,90] Sum
+(1.5,1.6]       1       1       1   3
+(1.6,1.7]       2       3       1   6
+(1.7,1.8]       2       4       1   7
+(1.8,1.9]       1       1       2   4
+Sum             6       9       5  20
+Or we can work with the relative frequencies;
+
+```{r}
+tta <- prop.table(ta)
+addmargins(tta)
+fweights
+```
+
+
+
+
+### Exercises
+
+
+1. Create a vector named v which contains 10 random integer values between -100 and +100 (?sample).
+2. Create a two-dimensional 5?5 array named a comprised of sequence of even integers greater than 25. 
+
+   * Create a list named s containing sequence of 20 capital letters, starting with 'C' (hint ?LETTERS) 
+
+3. Create a list named l and put all previously created objects in it. Name them a, b and c respectively. 
+How many elements are there in the list? Show the structure of the list. Count all elements recursively.
+
+4. Without running commands in R, answer the following questions:
+
+* what is the result of l[[3]]?
+* How would you access random-th letter in the list element c?
+* If you convert list l to a vector, what will be the type of it's elements?
+* Can this list be converted to an array? What will be the data type of elements in array?
+* Check the results with R.
+
+5. Remove letters from the list l. Convert the list l to a vector and check its class. Compare it with the result from exercise 4, question #3.
+6. Find the difference between elements in l[["a"]] and l[["b"]]. Find the intersection between them. Is there number 33 in their union?
+7. Create 5?5 matrix named m and fill it with random numeric values rounded to two decimal places, ranging from 1.00 to 100.00.
+8. Answer the following question without running R command, then check the result.
+   What will be the class of data structure if you convert matrix m to:
+   * vector
+   * list
+   * data frame
+   * array?
+   

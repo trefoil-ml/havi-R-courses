@@ -1,0 +1,73 @@
+---
+title: "First steps in R"
+author: "Hicham Zmarrou, PhD"
+date: "March 6, 2017"
+output: ioslides_presentation
+logo: img/R_logo.svg.png
+---
+
+# Overview
+
+## Why R
+
+## Goals 
+
+### **You will learn:**
+
+<center>![picture of spaghetti](img/data-science.png)</center>
+<center> Data science cycle (source: [R for Data Science](http://r4ds.had.co.nz/))</center>
+ 
+### **You won’t learn**
+
++ Big data  
+
++ Non-rectangular data
+
++ Hypothesis confirmation
+
+## Data import 
+
+<center>![import](img/image03sml.png)</center>
+
+
+## Data tidying and transformation 
+
+<center>![tidy](img/data-tidy.png)</center>
+
+
+## Data visualisation and modeling
+
+<center>![vis](img/vis-mod.png)</center>
+
+## Results communication 
+
+<center>![comm](img/communicate.png)</center>
+
+## Outline
+### __Day 1__ 
+
+#### [R demo](Rdemo.Rmd)    
+
+#### R data structures
+
+#### Data visualisation with __ggplot2__ 
+
+#### Data transformation with __dplyr__ 
+
+### __Day 2__
+
+#### Data transformation with __dplyr__    
+
+#### Data wrangling
+
+* Tiblles with **tibble**
+* Data import
+
+#### Data visualisation with __ggplot2__ 
+#### Data transformation with __dplyr__ 
+
+### Theoery and hands on labs:
+  + Data exploration (Visualisation and transform)   
+  + Data wrangeling (import, tidying and transform) 
+  + Data modeling 
+  + Results communication
